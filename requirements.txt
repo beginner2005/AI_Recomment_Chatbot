@@ -1,3 +1,5 @@
+cython
+numpy<2.0
 fastapi
 uvicorn
 python-dotenv
@@ -5,8 +7,6 @@ pymongo
 google-generativeai
 scikit-learn
 pandas
-numpy<2.0
-scikit-surprise
-apscheduler
 certifi
 pydantic
+scikit-surprise==1.1.3
