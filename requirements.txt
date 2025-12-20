@@ -1,3 +1,8 @@
+# Các thư viện nền tảng cài trước
+cython
+numpy<2.0
+
+# Các thư viện chính
 fastapi
 uvicorn
 python-dotenv
@@ -5,8 +10,8 @@ pymongo
 google-generativeai
 scikit-learn
 pandas
-numpy<2.0
-scikit-surprise
-apscheduler
 certifi
 pydantic
+
+# Surprise cài cuối cùng và chỉ định phiên bản mới nhất
+scikit-surprise==1.1.3
