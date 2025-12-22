@@ -1,10 +1,8 @@
-# Các thư viện nền tảng cài trước
+# Các thư viện nền tảng
 cython
 numpy<2.0
 
 # Các thư viện chính
-cython
-numpy<2.0
 fastapi
 uvicorn
 python-dotenv
@@ -14,7 +12,10 @@ scikit-learn
 pandas
 certifi
 pydantic
+requests
 
-# Surprise cài cuối cùng và chỉ định phiên bản mới nhất
-scikit-surprise==1.1.3
+# Thư viện lên lịch (Bị thiếu cái này nè)
+APScheduler
+
+# Surprise cài cuối cùng
 scikit-surprise==1.1.3

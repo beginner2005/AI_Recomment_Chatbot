@@ -16,3 +16,4 @@ mongodb+srv://admin:hieu123a@cluster0.pmtdgr9.mongodb.net/ecommerce_db?retryWrit
 git add .
 git commit -m "Fix build error"
 git push
+(git push -u origin main --force)
