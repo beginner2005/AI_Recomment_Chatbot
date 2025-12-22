@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
-import certifi # Thêm thư viện này để fix lỗi SSL
+import certifi 
 import sys
 
 load_dotenv()
@@ -14,11 +14,10 @@ if not MONGODB_URL:
     print("LỖI: Chưa tìm thấy MONGODB_URL trong file .env")
     sys.exit(1)
 
-# Cấu hình kết nối (Thêm tlsCAFile để tránh lỗi SSLHandshakeError)
+# Cấu hình kết nối
 try:
     client = MongoClient(MONGODB_URL, tlsCAFile=certifi.where())
     
-    # Thử "ping" server để xem kết nối được chưa
     client.admin.command('ping')
     print("Đã kết nối thành công đến MongoDB Atlas!")
     
@@ -28,10 +27,10 @@ try:
     users_collection = db["users"]
     products_collection = db["products"]
     interactions_collection = db["interactions"]
+    vouchers_collection = db["vouchers"]
 
 except Exception as e:
     print(f"Kết nối thất bại: {e}")
-    # Nếu kết nối DB lỗi thì app không nên chạy tiếp
     sys.exit(1)
 
 def get_database():

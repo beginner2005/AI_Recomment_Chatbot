@@ -24,7 +24,7 @@ class HybridRecommender:
         self.product_map = {} # Map int_id -> product_doc
         self.product_internal_id_to_idx = {} # Map id "104" -> index ma trận 0,1,2...
         self.user_ids = []
-        self.product_ids = [] # List các ID sản phẩm (dạng string của int id, vd "104")
+        self.product_ids = [] # List các ID sản phẩm 
         
         self.model_path = "trained_model.pkl"
         
@@ -34,7 +34,6 @@ class HybridRecommender:
         db = get_database()
         
         # 1. Lấy dữ liệu Products
-        # Lưu ý: Mock data mới dùng 'title' thay vì 'name', và có 'id' riêng (vd: 104)
         products = list(db["products"].find())
         print(f"   - Tìm thấy {len(products)} sản phẩm.")
         
@@ -48,7 +47,6 @@ class HybridRecommender:
         print(f"   - Tìm thấy {len(users)} người dùng.")
 
         # 3. Tổng hợp Interactions từ ORDERS (Thay vì interactions collection)
-        # Vì bạn chưa có mock behavior, ta dùng lịch sử mua hàng làm tín hiệu mạnh nhất (Rating = 5)
         orders = list(db["orders"].find())
         print(f"   - Tìm thấy {len(orders)} đơn hàng.")
         
@@ -79,7 +77,7 @@ class HybridRecommender:
         # interactions = list(db["interactions"].find()) ... (Code cũ của bạn ở đây)
         
         if not cf_data:
-            print("⚠️ Cảnh báo: Không có dữ liệu tương tác (đơn hàng). Model CF sẽ không học được gì.")
+            print("- Cảnh báo: Không có dữ liệu tương tác (đơn hàng). Model CF sẽ không học được gì.")
             df = pd.DataFrame(columns=["user_id", "product_id", "rating"])
         else:
             df = pd.DataFrame(cf_data)
@@ -115,7 +113,7 @@ class HybridRecommender:
             tfidf_matrix = tfidf.fit_transform(product_features)
             self.content_similarity_matrix = cosine_similarity(tfidf_matrix)
         
-        print("✅ Chuẩn bị dữ liệu hoàn tất!")
+        print("- Chuẩn bị dữ liệu hoàn tất!")
         return True
 
     def train_model(self):
@@ -126,11 +124,11 @@ class HybridRecommender:
         if self.trainset:
             self.cf_model = SVD(n_factors=20, n_epochs=20, random_state=42)
             self.cf_model.fit(self.trainset)
-            print("✅ Đã train xong Collaborative Filtering Model.")
+            print("- Đã train xong Collaborative Filtering Model.")
             self.save_model()
             return True
         else:
-            print("❌ Không đủ data để train CF.")
+            print("- Không đủ data để train CF.")
             return False
 
     def save_model(self):
@@ -145,7 +143,7 @@ class HybridRecommender:
         }
         with open(self.model_path, 'wb') as f:
             pickle.dump(data, f)
-        print("💾 Đã lưu model ra file.")
+        print("- Đã lưu model ra file.")
 
     def load_model(self):
         if not os.path.exists(self.model_path):
@@ -160,7 +158,7 @@ class HybridRecommender:
             self.product_ids = data['product_ids']
             self.user_ids = data['user_ids']
             self.product_internal_id_to_idx = data.get('product_internal_id_to_idx', {})
-            print("📂 Đã load model từ file.")
+            print("- Đã load model từ file.")
             return True
         except Exception as e:
             print(f"Lỗi load model: {e}. Retraining...")
@@ -219,9 +217,8 @@ class HybridRecommender:
                         content_score = np.mean(sims)
             
             # Nếu user mới tinh (Cold Start): Ưu tiên ContentScore hoặc Popularity
-            # Ở đây ta dùng trọng số linh hoạt
             if is_new_user:
-                final_score = content_score # Hoặc điểm rating trung bình của sp
+                final_score = content_score 
             else:
                 final_score = 0.7 * cf_score + 0.3 * content_score
                 

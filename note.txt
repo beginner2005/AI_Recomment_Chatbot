@@ -12,3 +12,7 @@ http://localhost:8000
 pip freeze > requirements.txt
 
 mongodb+srv://admin:hieu123a@cluster0.pmtdgr9.mongodb.net/ecommerce_db?retryWrites=true&w=majority
+
+git add .
+git commit -m "Fix build error"
+git push
