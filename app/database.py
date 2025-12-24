@@ -28,6 +28,7 @@ try:
     products_collection = db["products"]
     interactions_collection = db["interactions"]
     vouchers_collection = db["vouchers"]
+    orders_collection = db["orders"]
 
 except Exception as e:
     print(f"Kết nối thất bại: {e}")

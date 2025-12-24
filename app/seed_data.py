@@ -18,7 +18,7 @@ if not MONGODB_URL:
 try:
     client = pymongo.MongoClient(MONGODB_URL, tlsCAFile=certifi.where())
     db = client[DATABASE_NAME]
-    print(f"✅ Đã kết nối MongoDB: {DATABASE_NAME}")
+    print(f"- Đã kết nối MongoDB: {DATABASE_NAME}")
 except Exception as e:
     print(f"- Lỗi kết nối: {e}")
     exit()
