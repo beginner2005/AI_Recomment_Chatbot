@@ -209,7 +209,7 @@ tools_list = [
 ]
 
 model = genai.GenerativeModel(
-    model_name='gemini-2.5-flash',
+    model_name='gemini-3-flash',
     tools=tools_list,
     system_instruction="""
     Bạn là Trợ lý Ảo chuyên nghiệp của TechShop.

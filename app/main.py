@@ -68,12 +68,12 @@ async def root():
     }
 
 @app.get("/recommend/{user_id}")
-async def get_recommendations(user_id: str, n_items: int = 10):
+async def get_recommendations(user_id: str, n_items: int = 50):
     """
     Lấy gợi ý sản phẩm cho user
     
     - **user_id**: ID của user cần gợi ý
-    - **n_items**: Số lượng sản phẩm cần gợi ý (mặc định 10)
+    - **n_items**: Số lượng sản phẩm cần gợi ý (mặc định 50)
     """
     try:
         if n_items < 1 or n_items > 100:
